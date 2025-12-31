@@ -769,3 +769,356 @@ img.header__image-bg {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* ===========================
+   MODERN UI/UX FEATURES CSS
+   =========================== */
+
+/* 1. NAVBAR SCROLL EFFECT */
+nav.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+nav.navbar-scrolled .nav__header {
+  background-color: transparent;
+}
+
+/* 2. SCROLL PROGRESS BAR */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  z-index: 9999;
+  transition: width 0.1s ease;
+  width: 0%;
+}
+
+/* 3. TOAST NOTIFICATION SYSTEM */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  color: #3f3b57;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10000;
+  max-width: 350px;
+  font-size: 0.9rem;
+}
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast i {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.toast-success {
+  border-left: 4px solid #28a745;
+}
+
+.toast-success i {
+  color: #28a745;
+}
+
+.toast-error {
+  border-left: 4px solid #dc3545;
+}
+
+.toast-error i {
+  color: #dc3545;
+}
+
+.toast-info {
+  border-left: 4px solid #17a2b8;
+}
+
+.toast-info i {
+  color: #17a2b8;
+}
+
+/* Mobile responsive toast */
+@media (max-width: 640px) {
+  .toast {
+    right: 10px;
+    left: 10px;
+    bottom: 10px;
+    max-width: calc(100% - 20px);
+  }
+}
+
+/* 4. PARALLAX EFFECT */
+.parallax {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* Apply parallax to header background */
+.header__image-bg.parallax {
+  transform: translateY(-50%);
+}
+
+/* 5. LAZY LOADING SKELETON */
+.lazy-loading {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  min-height: 200px;
+}
+
+.lazy-loaded {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 6. COUNT-UP ANIMATION */
+.stat-number {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  display: inline-block;
+}
+
+/* 7. CUSTOM CURSOR (Desktop Only) */
+.custom-cursor,
+.cursor-follower {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10001;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.cursor-follower {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.custom-cursor.cursor-hover {
+  width: 20px;
+  height: 20px;
+}
+
+.cursor-follower.cursor-hover {
+  width: 60px;
+  height: 60px;
+}
+
+/* Hide default cursor when custom cursor is active */
+@media (min-width: 769px) {
+  body:has(.custom-cursor) {
+    cursor: none;
+  }
+  
+  body:has(.custom-cursor) a,
+  body:has(.custom-cursor) button {
+    cursor: none;
+  }
+}
+
+/* 8. IMAGE ZOOM ON HOVER */
+.zoomable {
+  overflow: hidden;
+  display: block;
+}
+
+.zoomable img {
+  transition: transform 0.3s ease;
+  width: 100%;
+  display: block;
+}
+
+.zoomable:hover img,
+.zoomable img:hover {
+  transform: scale(1.1);
+}
+
+/* Apply to product images */
+.product__card {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product__card img {
+  transition: transform 0.3s ease;
+}
+
+.product__card:hover img {
+  transform: scale(1.1);
+}
+
+/* Apply to instagram images */
+.instagram__grid img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.instagram__grid img:hover {
+  transform: scale(1.1);
+}
+
+/* 9. SEARCH FILTER ANIMATIONS */
+.search-fade-in {
+  animation: searchFadeIn 0.3s ease;
+}
+
+.search-fade-out {
+  animation: searchFadeOut 0.3s ease;
+}
+
+@keyframes searchFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes searchFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Search input styling */
+#search-input {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+  outline: none;
+  border-color: var(--text-dark);
+}
+
+/* 10. TYPING ANIMATION */
+.header__content h1 {
+  opacity: 0;
+  animation: typingFadeIn 0.5s forwards;
+}
+
+@keyframes typingFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Typing cursor effect (optional) */
+.header__content h1::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--text-dark);
+  margin-left: 5px;
+  animation: blink 0.7s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Remove cursor after typing is complete (after 5 seconds) */
+.header__content h1.typing-complete::after {
+  display: none;
+}
+
+/* ACCESSIBILITY IMPROVEMENTS */
+/* Ensure focus states are visible for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--text-dark);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .parallax {
+    transform: none !important;
+  }
+  
+  .custom-cursor,
+  .cursor-follower {
+    display: none !important;
+  }
+}
