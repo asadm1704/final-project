@@ -756,6 +756,11 @@ if (typewriterElement) {
             typewriterElement.textContent += originalText.charAt(charIndex);
             charIndex++;
             setTimeout(typeWriter, typeSpeed);
+        } else {
+            // Remove cursor after typing is complete
+            setTimeout(() => {
+                typewriterElement.classList.add('typing-complete');
+            }, 1000);
         }
     };
     
