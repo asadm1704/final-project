@@ -464,9 +464,6 @@ function showToast(message, type = 'info', duration = 3000) {
 
 // Update contact form to use toast notifications
 if (contactForm) {
-    // Remove old success function and update form handler
-    const originalSubmitHandler = contactForm.onsubmit;
-    
     contactForm.addEventListener("submit", (e) => {
         e.preventDefault();
         
@@ -619,11 +616,11 @@ if (statNumbers.length > 0 && 'IntersectionObserver' in window) {
 // ===========================
 /**
  * Creates custom cursor with follower element
- * Only active on desktop devices
+ * Only active on desktop devices (based on touch support and viewport width)
  */
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-if (!isMobile && window.innerWidth > 768) {
+if (!hasTouch && window.innerWidth > 768) {
     const createCustomCursor = () => {
         const cursor = document.createElement('div');
         cursor.className = 'custom-cursor';
@@ -633,6 +630,9 @@ if (!isMobile && window.innerWidth > 768) {
         
         document.body.appendChild(cursor);
         document.body.appendChild(follower);
+        
+        // Add fallback class for browsers that don't support :has()
+        document.body.classList.add('custom-cursor-active');
         
         return { cursor, follower };
     };
